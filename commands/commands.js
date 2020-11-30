@@ -26,7 +26,7 @@ class Commands {
         return -1;
     }
 
-    Exeycute(keyword, args, msg) {
+    Execute(keyword, args, msg) {
         let index = this.exists(keyword);
 
         if (index >= 0) {

@@ -7,7 +7,7 @@ class CmdDevelopment extends Command {
 
     Execute(args, msg) {
         let command = (args.length >= 1) ? args[0].toLowerCase() : 'help';
-        let role = msg.guild.roles.cache.find(role => role.name == 'Developer');
+        let role = msg.guild.roles.cache.find(role => role.name == 'Russian Engineer');
 
         switch (command) {
             case 'join':

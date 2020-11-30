@@ -38,6 +38,9 @@ class CmdRainbowSix extends Command {
                 msg.channel.send(`\`\`\`md\nuser <${username}> not found on <${platform}>\`\`\``);
                 return;
             }
+
+            let remainingKills = userStats.stats.general.deaths - userStats.stats.general.kills;
+            let remainingKillsString = ( remainingKills >= 0) ? `Kills remaining to positive KDR: ${remainingKills}` : ``;
     
             let statString = `\`\`\`cs\n
             [${username}]
@@ -49,6 +52,8 @@ class CmdRainbowSix extends Command {
     
             Wins: ${userStats.stats.general.wins}
             Lossess: ${userStats.stats.general.losses}
+
+            ${remainingKillsString}
             \`\`\`
             `;
     
