@@ -1,5 +1,5 @@
 const Command = require('../base/command').default;
-const Discord = require('discord.js')
+const Discord = require('discord.js');
 
 class CmdEftMarket extends Command {
     constructor(name, keyword, api) {
