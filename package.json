@@ -2,15 +2,20 @@
   "name": "artyom-bot",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "keywords": ["discord-bot", "discordJS", "bot", "discord"],
+  "keywords": [
+    "discord-bot",
+    "discordJS",
+    "bot",
+    "discord"
+  ],
   "author": "xDarkyne",
   "dependencies": {
     "discord.js": "^12.4.1",
+    "eft-market-api": "^1.0.0",
     "r6statsapi": "^1.0.3"
   },
   "license": "ISC",
