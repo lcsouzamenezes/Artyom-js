@@ -1,4 +1,5 @@
 const Command = require('../base/command').default;
+const Discord = require('discord.js');
 
 class CmdRainbowSix extends Command {
     constructor(name, keyword, api) {
@@ -35,29 +36,28 @@ class CmdRainbowSix extends Command {
     GetGenericStats(username, platform, msg) {
         this.api.getGenericStats(username, platform, 'all').then(userStats => {
             if (userStats.status == 'error') {
-                msg.channel.send(`\`\`\`md\nuser <${username}> not found on <${platform}>\`\`\``);
+                let errEmbed = new Discord.MessageEmbed()
+                .setColor('#dc3545')
+                .setTitle('Erorr')
+                .setDescription(`No user **${username}** found on **${platform}**.`)
+                .setTimestamp();
+
+                msg.channel.send(errEmbed);
                 return;
             }
 
-            let remainingKills = userStats.stats.general.deaths - userStats.stats.general.kills;
-            let remainingKillsString = ( remainingKills >= 0) ? `Kills remaining to positive KDR: ${remainingKills}` : ``;
+            let embed = new Discord.MessageEmbed()
+            .setColor('#292929')
+            .setTitle(`${username}`)
+            .addFields(
+                { name: 'KD:', value: `**${userStats.stats.general.kd}**`, inline: true},
+                { name: 'Combat Stats:', value: `Kills: **${userStats.stats.general.kills}**\nAssists: **${userStats.stats.general.assists}**\nDeaths: **${userStats.stats.general.deaths}**`, inline: true },
+                { name: 'Match Stats:', value: `Wins: **${userStats.stats.general.wins}%**\nLosses: **${userStats.stats.general.losses}%**`, inline: true},
+                { name: '\u200B', value: '\u200B' },
+            )
+            .setTimestamp();
     
-            let statString = `\`\`\`cs\n
-            [${username}]
-            KD: ${userStats.stats.general.kd}
-    
-            Kills: ${userStats.stats.general.kills}
-            Assists: ${userStats.stats.general.assists}
-            Deaths: ${userStats.stats.general.deaths}
-    
-            Wins: ${userStats.stats.general.wins}
-            Lossess: ${userStats.stats.general.losses}
-
-            ${remainingKillsString}
-            \`\`\`
-            `;
-    
-            msg.channel.send(statString)
+            msg.channel.send(embed)
         });
     }
 }
