@@ -1,10 +1,12 @@
 const Config = require('../includes/config.js').default;
 const conf = new Config()
 const R6StatsAPI = require('r6statsapi').default;
+const EFTMarketApi = require('eft-market-api').default;
 /* COMMANDS */
 const Command = require('./base/command').default
 const CmdRainbowSix = require('./modules/cmd_rainbowsix').default
 const CmdDevelopment = require('./modules/cmd_development').default
+const CmdEftMarket = require('./modules/cmd_eftmarket').default
 
 class Commands {
     constructor(key = '!') {
@@ -12,12 +14,13 @@ class Commands {
         this.CommandList = [
             new Command("help", "help"),
             new CmdRainbowSix('Rainbow Six Siege', 'r6', new R6StatsAPI(conf.r6apiKey)),
-            new CmdDevelopment('Development', "dev")
+            new CmdDevelopment('Development', "dev"),
+            new CmdEftMarket('Escape from Tarkov Market', 'eft', new EFTMarketApi(conf.eftmapikey))
         ]
     }
 
     exists(keyword) {
-        for (let i = 0; i <= this.CommandList.length; i++) {
+        for (let i = 0; i < this.CommandList.length; i++) {
             if (this.CommandList[i].keyword == keyword) {
                 return i;
             } else { continue; }
